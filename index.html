@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>⚡ Ashvin JEE Cyber OS V2</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<audio id="clickSound">
+<source src="click.mp3">
+</audio>
+
+
+
+<div class="avatar">
+
+<div class="circle">
+👨‍💻
+</div>
+
+<h3>Ashvin</h3>
+
+<p>JEE Cyber Warrior</p>
+
+</div>
+
+
+
+
+
+<div class="sidebar">
+
+<h2>⚡ CYBER OS</h2>
+
+<p>🏠 Dashboard</p>
+<p>📚 Lectures</p>
+<p>🎯 Mission</p>
+<p>🏆 Badges</p>
+<p>📈 Analytics</p>
+<p>⚙ Settings</p>
+
+</div>
+
+
+
+
+
+<div class="main">
+
+
+<h1>🚀 JEE COMMAND CENTER</h1>
+
+<p id="clock"></p>
+
+
+
+
+
+<div class="card">
+
+<h2>⭐ Gamer Level</h2>
+
+<h2 id="level">Level 1</h2>
+
+<p id="xp">XP : 0</p>
+
+
+<div class="bar">
+<div id="xpBar"></div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+<div class="card">
+
+<h2>📚 266 Lecture Tracker</h2>
+
+
+<p id="count">
+0 / 266 Completed
+</p>
+
+
+<div class="bar">
+
+<div id="lectureBar"></div>
+
+</div>
+
+
+
+<div id="lectureBox"></div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>🏆 Achievement Center</h2>
+
+
+<p id="badges">
+🔒 No Badge
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>📈 Weekly Progress</h2>
+
+
+<canvas id="graph"></canvas>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>📊 Subject Power</h2>
+
+
+<p>⚡ Physics : <span id="physics">0</span></p>
+
+<button onclick="physicsAdd()">
+Physics +1
+</button>
+
+
+<div class="bar">
+<div id="physicsBar"></div>
+</div>
+
+
+
+
+
+<p>🧪 Chemistry : <span id="chemistry">0</span></p>
+
+<button onclick="chemAdd()">
+Chemistry +1
+</button>
+
+
+<div class="bar">
+<div id="chemBar"></div>
+</div>
+
+
+
+
+
+<p>📐 Maths : <span id="maths">0</span></p>
+
+<button onclick="mathAdd()">
+Maths +1
+</button>
+
+
+<div class="bar">
+<div id="mathBar"></div>
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>🎯 Daily Mission</h2>
+
+
+<button onclick="missionDone()">
+COMPLETE ✅
+</button>
+
+
+<p id="mission">
+Pending
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>📝 Notes</h2>
+
+
+<textarea id="notes"></textarea>
+
+
+<button onclick="saveNotes()">
+SAVE 💾
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>✅ To Do</h2>
+
+
+<input id="task">
+
+
+<button onclick="addTask()">
+ADD +
+</button>
+
+
+<ul id="taskList"></ul>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="card">
+
+<h2>⏳ JEE Countdown</h2>
+
+
+<p id="countdown"></p>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script src="script.js"></script>
+
+
+</body>
+
+</html>
