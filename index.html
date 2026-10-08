@@ -1,303 +1,102 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>⚡ Ashvin JEE Cyber OS V2</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXUS JEE - Command Center</title>
+<meta name="description" content="NEXUS JEE — JEE study command center: syllabus, planner, mistake book, mock tests aur analytics. Offline-first, phone pe install ho jaata hai.">
+<meta name="theme-color" content="#050509">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NEXUS JEE">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon-180.png">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
 </head>
-
-
 <body>
-
-
-<audio id="clickSound">
-<source src="click.mp3">
-</audio>
-
-
-
-<div class="avatar">
-
-<div class="circle">
-👨‍💻
+<div class="app">
+<aside>
+  <div class="logo"><i></i><div><b>NEXUS JEE</b><small>CREATED BY ASHVIN GURJAR</small></div></div>
+  <nav id="nav"><div id="pill"></div>
+    <h6>STUDY</h6>
+    <button class="on" data-page="dashboard"><span>&#9672;</span>Dashboard</button><button data-page="syllabus"><span>&#9638;</span>Syllabus</button><button data-page="planner"><span>&#10003;</span>Planner</button><button data-page="calendar"><span>&#9635;</span>Calendar</button>
+    <h6>PRACTICE</h6>
+    <button data-page="lectures"><span>&#9654;</span>Lectures</button><button data-page="mistakes"><span>&#9888;</span>Mistake Book</button><button data-page="tests"><span>&#9776;</span>Tests</button><button data-page="analytics"><span>&#9684;</span>Analytics</button>
+    <h6>APP</h6>
+    <button data-page="settings"><span>&#9881;</span>Settings</button>
+  </nav>
+  <div class="me"><b id="lvl">Level 1</b> <span id="xptxt" style="color:var(--mut)">&middot; 0 / 1000 XP</span><div class="xp"><i id="xp"></i></div></div>
+</aside>
+<main>
+  <header class="r"><div><div class="lb" id="dt">TUESDAY</div><h1 id="ttl">Good evening, <em>Ashvin</em></h1></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="supa-pill" id="supa-pill" type="button" title="Supabase sync">LOCAL</button><button class="btn" id="exp" type="button">Export</button><button class="btn p" id="go">&#9654; Start focus</button></div></header>
+  <div class="grid">
+    <div class="cd hero c12 r"><div><div class="lb">NEXUS JEE &middot; COMMAND CENTER</div><div class="num" id="dys">0</div><div class="unit" id="examLbl">days to JEE Main</div></div>
+      <div class="mis"><div class="rg"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#17172b" stroke-width="5"/><circle id="mr" cx="60" cy="60" r="52" fill="none" stroke="url(#gg)" stroke-width="5" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset 1.6s var(--e) .4s"/><defs><linearGradient id="gg"><stop offset="0" stop-color="#8b9bff"/><stop offset="1" stop-color="#c8a6ff"/></linearGradient></defs></svg><div id="mt">0/0</div></div>
+      <div><h3>Today's mission</h3><p id="mp">Add a task below to start your mission.</p></div></div></div>
+    <div class="cd kpi c3 r"><div class="lb">DAY STREAK</div><span class="num"><i id="stn" style="font-style:normal">0</i><em>d</em></span><div class="sd" id="sd"></div></div>
+    <div class="cd kpi c3 r"><div class="lb">STUDY HOURS</div><span class="num"><i id="hrn" data-d="1" style="font-style:normal">0</i><em>h</em></span><small id="hrSmall">0h this week</small></div>
+    <div class="cd kpi c3 r"><div class="lb">FOCUS SESSIONS</div><span class="num"><i id="scn" style="font-style:normal">0</i></span><small id="scSmall">no sessions yet</small></div>
+    <div class="cd kpi c3 r"><div class="lb">MISTAKES TO REVIEW</div><span class="num"><i id="mkn" style="font-style:normal">0</i></span><small id="mkSmall" class="w">needs attention</small></div>
+    <div class="cd kpi c3 r"><div class="lb">QUESTIONS SOLVED</div><span class="num"><i id="qsn" style="font-style:normal">0</i></span><small id="qsSmall">no tests logged yet</small></div>
+    <div class="cd kpi c3 r"><div class="lb">ACCURACY</div><span class="num"><i id="acn" style="font-style:normal">0</i><em>%</em></span><small id="acSmall">no data yet</small></div>
+    <div class="cd c8 r"><div class="ch-h"><div><div class="lb">STUDY ACTIVITY</div><div class="rd"><div class="num" id="rdn">0</div><span id="rdl">hours total</span></div></div><div class="seg" id="seg"><button>1W</button><button class="on">2W</button><button>1M</button></div></div>
+      <div class="chw" id="cw"><svg id="sv"><defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b9bff" stop-opacity=".28"/><stop offset="1" stop-color="#8b9bff" stop-opacity="0"/></linearGradient><linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#8b9bff"/><stop offset="1" stop-color="#c8a6ff"/></linearGradient></defs><g id="gr" stroke="rgba(255,255,255,.05)"></g><path id="ar" fill="url(#ga)" opacity="0"/><path id="ln" fill="none" stroke="url(#gl)" stroke-width="2.2" stroke-linecap="round"/><line id="vl" stroke="rgba(139,155,255,.35)" opacity="0"/><circle id="dot" r="5.5" fill="#c8a6ff" opacity="0"/></svg></div>
+      <div class="ax"><span>PAST</span><span>TODAY</span></div></div>
+    <div class="cd tm c4 r"><div class="lb">FOCUS TIMER</div><div class="rg"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" fill="none" stroke="#17172b" stroke-width="4"/><circle id="tr" cx="100" cy="100" r="88" fill="none" stroke="url(#gg)" stroke-width="5" stroke-linecap="round" stroke-dasharray="552.9" stroke-dashoffset="552.9" style="filter:drop-shadow(0 0 6px rgba(139,155,255,.6))"/></svg><div id="tt">25:00</div></div>
+      <div class="pre" id="pre"><button class="on" data-m="25">25 min</button><button data-m="45">45 min</button><button data-m="60">60 min</button></div>
+      <div class="row"><button class="btn p" id="ts">Start</button><button class="btn" id="tx">Reset</button></div></div>
+    <div class="cd c4 r"><div class="lb">SYLLABUS PROGRESS</div>
+      <div class="sb"><div><span>Physics</span><span class="num" data-sub="Physics">0</span></div><div class="ln"><i data-sub="Physics"></i></div>
+      <div><span>Chemistry</span><span class="num" data-sub="Chemistry">0</span></div><div class="ln"><i data-sub="Chemistry"></i></div>
+      <div><span>Mathematics</span><span class="num" data-sub="Mathematics">0</span></div><div class="ln" style="margin-bottom:4px"><i data-sub="Mathematics"></i></div></div></div>
+    <div class="cd c4 r"><div class="lb">TODAY'S TASKS</div><div id="tl" style="margin-top:8px"></div>
+      <input class="add" id="ad" placeholder="+ Add a task and press Enter"></div>
+    <div class="cd c4 r"><div class="lb">PRACTICE</div>
+      <div class="pq"><div><b>JEE Main PYQs</b><small>Year-wise papers</small></div><span>&rarr;</span></div>
+      <div class="pq"><div><b>Chapter-wise PYQs</b><small>Physics &middot; Chemistry &middot; Maths</small></div><span>&rarr;</span></div>
+      <div class="pq"><div><b>Full mock test</b><small>3 hr &middot; 75 questions</small></div><span>&rarr;</span></div>
+      <div class="pq"><div><b>Mistake book</b><small id="pqMk">nothing to review yet</small></div><span>&rarr;</span></div></div>
+  </div>
+</main>
 </div>
 
-<h3>Ashvin</h3>
-
-<p>JEE Cyber Warrior</p>
-
+<!-- Mobile bottom navigation (1000px se chhoti screens par; desktop sidebar iske bina hi chalta hai) -->
+<nav id="tabbar" aria-label="Primary">
+  <button class="on" type="button" data-page="dashboard"><i>&#9672;</i><span>Dashboard</span></button>
+  <button type="button" data-page="syllabus"><i>&#9638;</i><span>Syllabus</span></button>
+  <button type="button" data-page="planner"><i>&#10003;</i><span>Planner</span></button>
+  <button type="button" data-page="tests"><i>&#9776;</i><span>Tests</span></button>
+  <button type="button" id="more-btn" aria-expanded="false" aria-controls="more-sheet"><i>&#8943;</i><span>More</span></button>
+</nav>
+<div id="more-backdrop"></div>
+<div id="more-sheet" role="dialog" aria-label="More pages">
+  <div class="ms-h"><b>More</b><button class="ms-x" id="more-x" type="button" title="Close">&times;</button></div>
+  <div class="ms-grid">
+    <button type="button" data-page="calendar"><i>&#9635;</i><span>Calendar</span></button>
+    <button type="button" data-page="lectures"><i>&#9654;</i><span>Lectures</span></button>
+    <button type="button" data-page="mistakes"><i>&#9888;</i><span>Mistake Book</span></button>
+    <button type="button" data-page="analytics"><i>&#9684;</i><span>Analytics</span></button>
+    <button type="button" data-page="settings"><i>&#9881;</i><span>Settings</span></button>
+  </div>
 </div>
 
-
-
-
-
-<div class="sidebar">
-
-<h2>⚡ CYBER OS</h2>
-
-<p>🏠 Dashboard</p>
-<p>📚 Lectures</p>
-<p>🎯 Mission</p>
-<p>🏆 Badges</p>
-<p>📈 Analytics</p>
-<p>⚙ Settings</p>
-
-</div>
-
-
-
-
-
-<div class="main">
-
-
-<h1>🚀 JEE COMMAND CENTER</h1>
-
-<p id="clock"></p>
-
-
-
-
-
-<div class="card">
-
-<h2>⭐ Gamer Level</h2>
-
-<h2 id="level">Level 1</h2>
-
-<p id="xp">XP : 0</p>
-
-
-<div class="bar">
-<div id="xpBar"></div>
-</div>
-
-
-</div>
-
-
-
-
-
-
-<div class="card">
-
-<h2>📚 266 Lecture Tracker</h2>
-
-
-<p id="count">
-0 / 266 Completed
-</p>
-
-
-<div class="bar">
-
-<div id="lectureBar"></div>
-
-</div>
-
-
-
-<div id="lectureBox"></div>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-<h2>🏆 Achievement Center</h2>
-
-
-<p id="badges">
-🔒 No Badge
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-<h2>📈 Weekly Progress</h2>
-
-
-<canvas id="graph"></canvas>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="card">
-
-<h2>📊 Subject Power</h2>
-
-
-<p>⚡ Physics : <span id="physics">0</span></p>
-
-<button onclick="physicsAdd()">
-Physics +1
-</button>
-
-
-<div class="bar">
-<div id="physicsBar"></div>
-</div>
-
-
-
-
-
-<p>🧪 Chemistry : <span id="chemistry">0</span></p>
-
-<button onclick="chemAdd()">
-Chemistry +1
-</button>
-
-
-<div class="bar">
-<div id="chemBar"></div>
-</div>
-
-
-
-
-
-<p>📐 Maths : <span id="maths">0</span></p>
-
-<button onclick="mathAdd()">
-Maths +1
-</button>
-
-
-<div class="bar">
-<div id="mathBar"></div>
-</div>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="card">
-
-<h2>🎯 Daily Mission</h2>
-
-
-<button onclick="missionDone()">
-COMPLETE ✅
-</button>
-
-
-<p id="mission">
-Pending
-</p>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="card">
-
-<h2>📝 Notes</h2>
-
-
-<textarea id="notes"></textarea>
-
-
-<button onclick="saveNotes()">
-SAVE 💾
-</button>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="card">
-
-<h2>✅ To Do</h2>
-
-
-<input id="task">
-
-
-<button onclick="addTask()">
-ADD +
-</button>
-
-
-<ul id="taskList"></ul>
-
-
-</div>
-
-
-
-
-
-
-
-
-<div class="card">
-
-<h2>⏳ JEE Countdown</h2>
-
-
-<p id="countdown"></p>
-
-
-</div>
-
-
-
-
-
-</div>
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<script src="script.js"></script>
-
-
+<script src="store.js"></script>
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="supabase.js"></script>
+<script src="pages/syllabus-data.js"></script>
+<script src="pages/syllabus.js"></script>
+<script src="pages/planner.js"></script>
+<script src="pages/calendar.js"></script>
+<script src="pages/lectures.js"></script>
+<script src="pages/mistakes.js"></script>
+<script src="pages/tests.js"></script>
+<script src="pages/analytics.js"></script>
+<script src="pages/settings.js"></script>
+<script src="app.js"></script>
+<script src="pwa.js"></script>
 </body>
-
 </html>

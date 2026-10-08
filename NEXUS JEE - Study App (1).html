@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXUS JEE - Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@200;300;400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050509;--cd:rgba(255,255,255,.028);--ln:rgba(255,255,255,.075);--tx:#f4f4fa;--mut:#8a8aa2;--a:#8b9bff;--b:#c8a6ff;--o:#ffb08a;--ok:#7fe0b0;--e:cubic-bezier(.16,1,.3,1);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{margin:0;box-sizing:border-box}
+html,body{background:var(--bg);color:var(--tx);font-family:'Open Sans','Segoe UI',system-ui,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(50% 40% at 12% 0%,rgba(139,155,255,.13),transparent 70%),radial-gradient(40% 40% at 100% 100%,rgba(255,176,138,.07),transparent 70%)}
+button,input{font:inherit;color:inherit;background:none;border:0}button{cursor:pointer}
+.app{position:relative;display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+aside{position:sticky;top:0;height:100vh;padding:24px 16px;border-right:1px solid var(--ln);display:flex;flex-direction:column;gap:20px}
+.logo{display:flex;align-items:center;gap:12px;padding:0 8px}.logo i{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--a),var(--b))}
+.logo b{display:block;font-weight:800;font-size:15px;letter-spacing:.06em}.logo small{display:block;color:var(--mut);font-size:9px;letter-spacing:.18em;margin-top:2px}
+nav{position:relative;display:flex;flex-direction:column;gap:2px}
+nav h6{font-size:10px;letter-spacing:.28em;color:#4f4f63;margin:16px 10px 6px;font-weight:600}
+#pill{position:absolute;left:0;right:0;top:0;height:42px;border-radius:12px;background:linear-gradient(90deg,rgba(139,155,255,.18),rgba(200,166,255,.04));border:1px solid rgba(139,155,255,.28);transition:transform .45s var(--e);pointer-events:none}
+nav button{position:relative;display:flex;align-items:center;gap:12px;height:42px;padding:0 12px;border-radius:12px;font-size:13px;color:var(--mut);text-align:left;transition:color .15s}
+nav button:hover,nav button.on{color:var(--tx)}nav button.on span{color:var(--a)}nav button span{width:18px;text-align:center}
+.me{margin-top:auto;padding:14px;border:1px solid var(--ln);border-radius:14px;background:var(--cd);font-size:12px}
+.xp{height:4px;border-radius:4px;background:#17172a;margin-top:10px;overflow:hidden}.xp i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--b));transition:width 1.6s var(--e) .5s}
+main{padding:28px clamp(18px,3vw,40px) 60px;max-width:1280px;width:100%}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:26px}
+.lb{font-size:10px;letter-spacing:.3em;color:var(--mut);font-weight:600}
+h1{font-size:clamp(30px,4vw,48px);font-weight:800;letter-spacing:-.03em;margin-top:8px}h1 em{font-style:normal;color:var(--mut);font-weight:300}
+.btn{padding:11px 22px;border-radius:99px;border:1px solid var(--ln);font-size:12px;color:var(--mut);transition:all .15s}.btn:hover{color:var(--tx);border-color:rgba(255,255,255,.22)}
+.btn.p{background:linear-gradient(135deg,var(--a),var(--b));color:#0a0a18;font-weight:600;border:0}.btn.p:hover{transform:translateY(-2px);color:#0a0a18}.btn:active{transform:scale(.97)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c8{grid-column:span 8}.c12{grid-column:span 12}
+.cd{position:relative;background:var(--cd);border:1px solid var(--ln);border-radius:20px;padding:24px;transition:transform .4s var(--e),border-color .4s;overflow:hidden}
+.cd::before{content:"";position:absolute;left:10%;right:10%;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(139,155,255,.6),transparent);opacity:.6}
+.cd:hover{transform:translateY(-3px);border-color:rgba(139,155,255,.25)}
+.num{font-weight:200;letter-spacing:-.05em;line-height:.95;font-variant-numeric:tabular-nums;background:linear-gradient(180deg,#fff,#cfd5ff 55%,#9d8cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.r{opacity:0;transform:translateY(34px);filter:blur(8px);transition:opacity 1s var(--e),transform 1s var(--e),filter .9s var(--e);transition-delay:calc(var(--i,0)*80ms)}
+.r.in{opacity:1;transform:none;filter:none}
+.hero{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.hero .num{font-size:clamp(84px,12vw,170px);margin-top:14px}.unit{color:var(--mut);font-size:15px;font-weight:300;margin-top:10px}
+.mis{display:flex;align-items:center;gap:22px}.mis .rg{position:relative;width:128px;height:128px}.rg svg{width:100%;height:100%;transform:rotate(-90deg)}.rg div{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:200}
+.mis p{font-size:13px;color:var(--mut);margin:6px 0 14px;max-width:190px}.mis h3{font-size:20px;font-weight:600}
+.kpi .num{font-size:clamp(44px,5vw,66px);margin:16px 0 8px;display:block}.kpi .num em{font-style:normal;font-size:.4em;color:var(--a);margin-left:3px;-webkit-text-fill-color:var(--a)}
+.kpi small{font-size:12px;color:var(--ok)}.kpi small.w{color:var(--o)}
+.sd{display:flex;gap:6px;margin-top:2px}.sd i{width:12px;height:12px;border-radius:50%;border:1.5px solid #34344a;transition:all .6s var(--e);transition-delay:calc(var(--k)*110ms + .7s)}.sd.go i.f{background:var(--a);border-color:var(--a);box-shadow:0 0 12px rgba(139,155,255,.7)}
+.ch-h{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
+.rd{display:flex;align-items:baseline;gap:10px;margin-top:10px}.rd .num{font-size:clamp(46px,6vw,80px)}.rd span{color:var(--mut);font-size:13px}
+.seg{display:flex;gap:2px;padding:3px;border:1px solid var(--ln);border-radius:99px}.seg button{padding:5px 13px;border-radius:99px;font-size:11px;color:var(--mut);transition:all .15s}.seg button.on{background:rgba(139,155,255,.16);color:var(--a)}
+.chw{position:relative;margin-top:14px}.chw svg{display:block;width:100%;height:230px;overflow:visible}
+.ax{display:flex;justify-content:space-between;font-size:10px;letter-spacing:.2em;color:#58586d;margin-top:10px}
+.tm{text-align:center}.tm .rg{position:relative;width:210px;height:210px;margin:14px auto 12px}.tm .rg div{font-size:54px;font-weight:200;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.pre{display:flex;justify-content:center;gap:8px;margin-bottom:14px}.pre button{padding:6px 14px;border-radius:99px;border:1px solid var(--ln);font-size:11px;color:var(--mut);transition:all .15s}.pre button.on{border-color:var(--a);color:var(--a);background:rgba(139,155,255,.1)}
+.tm .row{display:flex;gap:10px;justify-content:center}
+.sb{margin-top:18px}.sb>div:not(.ln){display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;font-size:14px}.sb .num{font-size:30px;font-weight:200}
+.ln{height:3px;border-radius:3px;background:#16162a;margin-bottom:22px;overflow:hidden}.ln i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--b));border-radius:3px;transition:width 1.6s var(--e) .4s;box-shadow:0 0 12px rgba(139,155,255,.6)}
+.tk{display:flex;align-items:center;gap:14px;padding:13px 0;border-bottom:1px solid var(--ln);font-size:14px;cursor:pointer;transition:transform .35s var(--e),opacity .3s}.tk:hover{transform:translateX(5px)}
+.tk i{flex:none;width:20px;height:20px;border-radius:50%;border:1.5px solid #3e3e58;transition:all .3s var(--e)}.tk.d{opacity:.4;text-decoration:line-through}.tk.d i{background:var(--a);border-color:var(--a);box-shadow:0 0 14px rgba(139,155,255,.6)}
+.tk em{margin-left:auto;font-style:normal;font-size:11px;color:var(--mut)}
+.add{width:100%;margin-top:14px;padding:12px 14px;border:1px dashed #34344a;border-radius:12px;font-size:13px;outline:0;transition:border-color .2s}.add:focus{border-color:var(--a)}
+.pq{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:15px 16px;margin-top:10px;border:1px solid var(--ln);border-radius:14px;cursor:pointer;transition:all .35s var(--e)}
+.pq:hover{border-color:rgba(139,155,255,.4);background:rgba(139,155,255,.06);transform:translateX(4px)}.pq b{display:block;font-size:14px;font-weight:600}.pq small{color:var(--mut);font-size:11px}.pq span{color:var(--a);transition:transform .3s var(--e)}.pq:hover span{transform:translateX(4px)}
+@media(max-width:1000px){.app{grid-template-columns:1fr}aside{display:none}.c3{grid-column:span 6}.c4,.c8{grid-column:span 12}}
+@media(max-width:560px){.c3{grid-column:span 12}.mis{flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside>
+  <div class="logo"><i></i><div><b>NEXUS JEE</b><small>CREATED BY ASHVIN GURJAR</small></div></div>
+  <nav id="nav"><div id="pill"></div>
+    <h6>STUDY</h6>
+    <button class="on"><span>&#9672;</span>Dashboard</button><button><span>&#9638;</span>Syllabus</button><button><span>&#10003;</span>Planner</button><button><span>&#9635;</span>Calendar</button>
+    <h6>PRACTICE</h6>
+    <button><span>&#9654;</span>Lectures</button><button><span>&#9888;</span>Mistake Book</button><button><span>&#9776;</span>Tests</button><button><span>&#9684;</span>Analytics</button>
+  </nav>
+  <div class="me"><b>Level 4</b> <span style="color:var(--mut)">&middot; 640 / 1000 XP</span><div class="xp"><i id="xp"></i></div></div>
+</aside>
+<main>
+  <header class="r"><div><div class="lb" id="dt">TUESDAY</div><h1 id="ttl">Good evening, <em>Ashvin</em></h1></div><div style="display:flex;gap:10px"><button class="btn">Export</button><button class="btn p" id="go">&#9654; Start focus</button></div></header>
+  <div class="grid">
+    <div class="cd hero c12 r"><div><div class="lb">NEXUS JEE &middot; COMMAND CENTER</div><div class="num" data-n="142">0</div><div class="unit">days to JEE Main 2026</div></div>
+      <div class="mis"><div class="rg"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="52" fill="none" stroke="#17172b" stroke-width="5"/><circle id="mr" cx="60" cy="60" r="52" fill="none" stroke="url(#gg)" stroke-width="5" stroke-linecap="round" stroke-dasharray="326.7" stroke-dashoffset="326.7" style="transition:stroke-dashoffset 1.6s var(--e) .4s"/><defs><linearGradient id="gg"><stop offset="0" stop-color="#8b9bff"/><stop offset="1" stop-color="#c8a6ff"/></linearGradient></defs></svg><div id="mt">1/4</div></div>
+      <div><h3>Today's mission</h3><p id="mp">Finish your 4 blocks to protect the streak.</p></div></div></div>
+    <div class="cd kpi c3 r"><div class="lb">DAY STREAK</div><span class="num"><i data-n="12" style="font-style:normal">0</i><em>d</em></span><div class="sd" id="sd"></div></div>
+    <div class="cd kpi c3 r"><div class="lb">STUDY HOURS</div><span class="num"><i data-n="86.5" data-d="1" style="font-style:normal">0</i><em>h</em></span><small>+4.2h this week</small></div>
+    <div class="cd kpi c3 r"><div class="lb">QUESTIONS SOLVED</div><span class="num"><i data-n="1240" style="font-style:normal">0</i></span><small>78% accuracy</small></div>
+    <div class="cd kpi c3 r"><div class="lb">MISTAKES TO REVIEW</div><span class="num"><i data-n="18" style="font-style:normal">0</i></span><small class="w">needs attention</small></div>
+    <div class="cd c8 r"><div class="ch-h"><div><div class="lb">STUDY ACTIVITY</div><div class="rd"><div class="num" id="rdn">0</div><span id="rdl">hours total</span></div></div><div class="seg" id="seg"><button>1W</button><button class="on">2W</button><button>1M</button></div></div>
+      <div class="chw" id="cw"><svg id="sv"><defs><linearGradient id="ga" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8b9bff" stop-opacity=".28"/><stop offset="1" stop-color="#8b9bff" stop-opacity="0"/></linearGradient><linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#8b9bff"/><stop offset="1" stop-color="#c8a6ff"/></linearGradient></defs><g id="gr" stroke="rgba(255,255,255,.05)"></g><path id="ar" fill="url(#ga)" opacity="0"/><path id="ln" fill="none" stroke="url(#gl)" stroke-width="2.2" stroke-linecap="round"/><line id="vl" stroke="rgba(139,155,255,.35)" opacity="0"/><circle id="dot" r="5.5" fill="#c8a6ff" opacity="0"/></svg></div>
+      <div class="ax"><span>PAST</span><span>TODAY</span></div></div>
+    <div class="cd tm c4 r"><div class="lb">FOCUS TIMER</div><div class="rg"><svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="88" fill="none" stroke="#17172b" stroke-width="4"/><circle id="tr" cx="100" cy="100" r="88" fill="none" stroke="url(#gg)" stroke-width="5" stroke-linecap="round" stroke-dasharray="552.9" stroke-dashoffset="552.9" style="filter:drop-shadow(0 0 6px rgba(139,155,255,.6))"/></svg><div id="tt">25:00</div></div>
+      <div class="pre" id="pre"><button class="on" data-m="25">25 min</button><button data-m="45">45 min</button><button data-m="60">60 min</button></div>
+      <div class="row"><button class="btn p" id="ts">Start</button><button class="btn" id="tx">Reset</button></div></div>
+    <div class="cd c4 r"><div class="lb">SYLLABUS PROGRESS</div>
+      <div class="sb"><div><span>Physics</span><span class="num" data-n="68">0</span></div><div class="ln"><i data-w="68"></i></div>
+      <div><span>Chemistry</span><span class="num" data-n="54">0</span></div><div class="ln"><i data-w="54"></i></div>
+      <div><span>Mathematics</span><span class="num" data-n="81">0</span></div><div class="ln" style="margin-bottom:4px"><i data-w="81"></i></div></div></div>
+    <div class="cd c4 r"><div class="lb">TODAY'S TASKS</div><div id="tl" style="margin-top:8px">
+      <div class="tk d"><i></i>Rotational motion - 20 PYQs<em>done</em></div><div class="tk"><i></i>Organic chemistry revision<em>45m</em></div><div class="tk"><i></i>Integration practice set<em>30m</em></div><div class="tk"><i></i>Mock test analysis<em>1h</em></div></div>
+      <input class="add" id="ad" placeholder="+ Add a task and press Enter"></div>
+    <div class="cd c4 r"><div class="lb">PRACTICE</div>
+      <div class="pq"><div><b>JEE Main PYQs</b><small>Year-wise papers</small></div><span>&rarr;</span></div>
+      <div class="pq"><div><b>Chapter-wise PYQs</b><small>Physics &middot; Chemistry &middot; Maths</small></div><span>&rarr;</span></div>
+      <div class="pq"><div><b>Full mock test</b><small>3 hr &middot; 75 questions</small></div><span>&rarr;</span></div>
+      <div class="pq"><div><b>Mistake book</b><small>18 questions to review</small></div><span>&rarr;</span></div></div>
+  </div>
+</main>
+</div>
+<script>
+var $=function(s){return document.querySelector(s)},$$=function(s){return [].slice.call(document.querySelectorAll(s))};
+$('#dt').textContent=new Date().toLocaleDateString('en-US',{weekday:'long',day:'numeric',month:'long'}).toUpperCase();
+var D={'1W':[3,5,4,6,5,7,6],'2W':[2,3,5,4,6,5,7,6,8,7,9,8,10,9],'1M':[]},cur='2W',P=[],CW=800,drawn=false;
+for(var i=0;i<30;i++)D['1M'].push(Math.round((4+i*.18+Math.sin(i*.9)*2.2+Math.cos(i*.4))*10)/10);
+function sum(a){return a.reduce(function(x,y){return x+y},0)}
+function build(){
+  var d=D[cur],W=CW=$('#cw').clientWidth||800,H=230,pd=14,mx=Math.max.apply(null,d)*1.2;
+  $('#sv').setAttribute('viewBox','0 0 '+W+' '+H);
+  P=d.map(function(v,i){return [pd+i*(W-2*pd)/(d.length-1),H-pd-(v/mx)*(H-2*pd)]});
+  var s='M'+P[0][0]+','+P[0][1];for(var i=1;i<P.length;i++){var a=P[i-1],b=P[i],m=(a[0]+b[0])/2;s+=' C'+m+','+a[1]+' '+m+','+b[1]+' '+b[0]+','+b[1]}
+  var ln=$('#ln'),ar=$('#ar'),g='';for(var k=0;k<4;k++){var y=pd+k*(H-2*pd)/3;g+='<line x1="0" x2="'+W+'" y1="'+y+'" y2="'+y+'"/>'}
+  $('#gr').innerHTML=g;ln.setAttribute('d',s);ar.setAttribute('d',s+' L'+P[P.length-1][0]+','+H+' L'+P[0][0]+','+H+' Z');
+  var L=ln.getTotalLength();ln.style.transition='none';ln.style.strokeDasharray=L;ln.style.strokeDashoffset=L;ar.style.transition='none';ar.style.opacity=0;$('#dot').style.opacity=0;
+  $('#vl').setAttribute('y1',0);$('#vl').setAttribute('y2',H);rd(P.length-1,true);
+  if(!drawn)return;void ln.getBoundingClientRect();ln.style.transition='stroke-dashoffset 1.8s var(--e)';ln.style.strokeDashoffset=0;ar.style.transition='opacity 1.3s ease .8s';ar.style.opacity=1;
+  setTimeout(function(){$('#dot').style.transition='opacity .5s';$('#dot').style.opacity=1},1500);
+}
+function rd(i,tot){var d=D[cur];$('#rdn').textContent=tot?sum(d).toFixed(1):d[i].toFixed(1);$('#rdl').textContent=tot?'hours total':'hours that day';$('#dot').setAttribute('cx',P[i][0]);$('#dot').setAttribute('cy',P[i][1]);$('#vl').setAttribute('x1',P[i][0]);$('#vl').setAttribute('x2',P[i][0])}
+$('#cw').addEventListener('mousemove',function(e){var r=this.getBoundingClientRect(),n=P.length,i=Math.max(0,Math.min(n-1,Math.round((e.clientX-r.left-14)/((CW-28)/(n-1)))));rd(i,false);$('#vl').setAttribute('opacity',1);$('#dot').style.opacity=1});
+$('#cw').addEventListener('mouseleave',function(){$('#vl').setAttribute('opacity',0);rd(P.length-1,true)});
+$$('#seg button').forEach(function(b){b.onclick=function(){$$('#seg button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');cur=b.textContent;drawn=true;build()}});
+var sd=$('#sd');for(var k=0;k<7;k++){var q=document.createElement('i');q.style.setProperty('--k',k);if(k<5)q.className='f';sd.appendChild(q)}
+function count(el){var to=parseFloat(el.dataset.n),dec=+el.dataset.d||0,t0=null;(function f(t){if(t0===null)t0=t;var p=Math.max(0,Math.min((t-t0)/1500,1)),e=1-Math.pow(1-p,4);el.textContent=(to*e).toFixed(dec).replace(/\B(?=(\d{3})+(?!\d))/g,dec?'':',');if(p<1)requestAnimationFrame(f)})(performance.now())}
+function reveal(el){el.classList.add('in');
+  $$('[data-n]').filter(function(n){return el.contains(n)}).forEach(function(n){setTimeout(function(){count(n)},350)});
+  if(el.contains($('#sd')))setTimeout(function(){sd.classList.add('go')},100);
+  [].forEach.call(el.querySelectorAll('[data-w]'),function(u){u.style.width=u.dataset.w+'%'});
+  if(el.contains($('#mr')))mission();if(el.contains($('#cw'))){drawn=true;build()}if(el.contains($('#tr')))timerUI();
+}
+var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){io.unobserve(en.target);reveal(en.target)}})},{threshold:.12});
+function play(){$$('.r').forEach(function(e,i){io.unobserve(e);e.classList.remove('in');e.style.setProperty('--i',i%7)});
+  $$('[data-w]').forEach(function(u){u.style.width='0'});$('#xp').style.width='0';$('#mr').style.strokeDashoffset=326.7;sd.classList.remove('go');drawn=false;
+  void document.body.offsetWidth;$$('.r').forEach(function(e){io.observe(e)});setTimeout(function(){$('#xp').style.width='64%'},100)}
+function mission(){var t=$$('#tl .tk'),d=t.filter(function(x){return x.classList.contains('d')}).length;$('#mt').textContent=d+'/'+t.length;
+  $('#mr').style.strokeDashoffset=326.7*(1-(t.length?d/t.length:0));$('#mp').textContent=d===t.length?'Mission complete. Streak protected.':'Finish your '+t.length+' blocks to protect the streak.'}
+$('#tl').addEventListener('click',function(e){var t=e.target.closest('.tk');if(t){t.classList.toggle('d');mission()}});
+$('#ad').addEventListener('keydown',function(e){if(e.key==='Enter'&&this.value.trim()){var d=document.createElement('div');d.className='tk';d.innerHTML='<i></i><span></span><em>new</em>';d.querySelector('span').textContent=this.value.trim();$('#tl').appendChild(d);this.value='';mission()}});
+var C=552.9,tot=1500,left=1500,iv=null;
+function fmt(s){return ('0'+Math.floor(s/60)).slice(-2)+':'+('0'+s%60).slice(-2)}
+function timerUI(){$('#tt').textContent=fmt(left);$('#tr').style.transition='stroke-dashoffset 1s linear';$('#tr').style.strokeDashoffset=C*(1-left/tot)}
+function stop(){clearInterval(iv);iv=null;$('#ts').textContent='Start'}
+function start(){if(iv){stop();return}if(left<=0)left=tot;$('#ts').textContent='Pause';
+  iv=setInterval(function(){left--;timerUI();if(left<=0){stop();$('#tt').textContent='Done';$('#ts').textContent='Start'}},1000)}
+$('#ts').onclick=start;$('#tx').onclick=function(){stop();left=tot;timerUI()};
+$$('#pre button').forEach(function(b){b.onclick=function(){$$('#pre button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');stop();tot=left=b.dataset.m*60;timerUI()}});
+$('#go').onclick=function(){$('#tt').scrollIntoView({behavior:'smooth',block:'center'});if(!iv)setTimeout(start,500)};
+var nb=$$('#nav button');function mv(b){$('#pill').style.transform='translateY('+b.offsetTop+'px)'}
+nb.forEach(function(b){b.onclick=function(){nb.forEach(function(x){x.classList.remove('on')});b.classList.add('on');mv(b);$('#ttl').innerHTML=b.textContent==='Dashboard'?'Good evening, <em>Ashvin</em>':b.textContent;scrollTo({top:0});play()}});
+mv($('#nav button.on'));addEventListener('resize',function(){mv($('#nav button.on'));if(drawn&&Math.abs($('#cw').clientWidth-CW)>4)build()});
+play();build();
+</script>
+</body>
+</html>

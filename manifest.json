@@ -1,0 +1,26 @@
+{
+  "name": "NEXUS JEE — Command Center",
+  "short_name": "NEXUS JEE",
+  "description": "JEE study command center — syllabus, planner, mistake book, mock tests aur analytics. Offline-first.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "id": "nexus-jee",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#050509",
+  "theme_color": "#050509",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Planner", "short_name": "Planner", "url": "./index.html#planner" },
+    { "name": "Tests", "short_name": "Tests", "url": "./index.html#tests" },
+    { "name": "Mistake Book", "short_name": "Mistakes", "url": "./index.html#mistakes" }
+  ]
+}
